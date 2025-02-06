@@ -1,5 +1,5 @@
 body {
-    background-image: url(images/autumn.jpg);
+    background-image: url(images/medieval.jpg);
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
@@ -20,24 +20,25 @@ body {
 
 /* Button styling */
 .button {
-    background-color: #4CAF50;
+    background-color: #3a453a;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     width: 200px;
     transition: background-color 0.3s ease;
 }
 
 button {
     font-size: 24px;
-    color: white;
+    color: rgb(202, 180, 154);
     background: none;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    border-radius: 50px;
+    background-color: #738e74;
 }
 
 /* Small text for translations */
@@ -57,7 +58,7 @@ small {
 #content h1 {
     font-family: 'MedievalSharp', sans-serif;
     font-size: 36px;
-    color: #333;
+    color: #cfbb91;
 }
 
 #content p {
