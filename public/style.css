@@ -1,0 +1,66 @@
+body {
+    background-image: url(images/autumn.jpg);
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container for all buttons */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+/* Button styling */
+.button {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    transition: background-color 0.3s ease;
+}
+
+button {
+    font-size: 24px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Small text for translations */
+small {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Content area */
+#content {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#content h1 {
+    font-family: 'MedievalSharp', sans-serif;
+    font-size: 36px;
+    color: #333;
+}
+
+#content p {
+    font-size: 18px;
+    color: #666;
+}

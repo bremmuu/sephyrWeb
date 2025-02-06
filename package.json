@@ -1,0 +1,11 @@
+{
+  "name": "sephyrWeb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bremmuu/sephyrWeb.git",
+  "author": "brem <johnardfermo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

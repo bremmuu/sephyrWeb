@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welsh Web Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home Button -->
+        <div class="button">
+            <button id="homeButton">Cartref</button>
+            <small>Home</small>
+        </div>
+
+        <!-- About Button -->
+        <div class="button">
+            <button id="aboutButton">Am</button>
+            <small>About</small>
+        </div>
+
+        <!-- Contact Button -->
+        <div class="button">
+            <button id="contactButton">Cyswllt</button>
+            <small>Contact</small>
+        </div>
+
+        <!-- Character Creation Form -->
+<div class="button">
+    <button id="create-character-btn" onclick="showCharacterForm()">Create Character</button>
+    <small>Create a New Character</small>
+</div>
+
+<!-- Character Form (Initially Hidden) -->
+<div id="character-form" style="display:none;">
+    <h3>Create Your Character</h3>
+    <form id="character-form-element">
+        <input type="text" id="char-name" placeholder="Character Name" required><br>
+        <input type="file" id="char-image" accept="image/*" required><br>
+        <textarea id="char-bio" placeholder="Character Biography" required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Toggle visibility of the character creation form
+    function showCharacterForm() {
+        document.getElementById('character-form').style.display = 'block';
+    }
+
+    // Handle form submission
+    document.getElementById('character-form-element').onsubmit = function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('char-name').value;
+        const bio = document.getElementById('char-bio').value;
+        const image = document.getElementById('char-image').files[0];
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('bio', bio);
+        formData.append('image', image);
+
+        // Send the form data to the backend using fetch
+        fetch('/character', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert('Character created successfully!');
+            document.getElementById('character-form-element').reset();
+            document.getElementById('character-form').style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error creating character.');
+        });
+    };
+</script>
+
+        <!-- Content Area -->
+        <div id="content">
+            <h1>Welcome to the Welsh Fantasy World</h1>
+            <p>Click the buttons to explore different sections of this world.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
