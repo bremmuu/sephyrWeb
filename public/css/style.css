@@ -236,11 +236,15 @@ body {
     animation: fadeIn 2.4s forwards 2.6s;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@font-face {
+    font-family: 'Kingthings Petrock';
+    src: url('fonts/KingthingsPetrock.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-/* Universal Celtic Font */
 body {
-    font-family: 'MedievalSharp', cursive;
+    font-family: 'Comfortaa', sans-serif;
     background-color: #1e1a14; /* Dark ember-like background */
     color: #e0a96d; /* Warm ember glow */
     text-align: center;
@@ -250,23 +254,25 @@ body {
 
 /* Welcome Text */
 #welcome-text {
-    font-size: 4rem;
-    color: #f7b048; /* Warm ember-orange */
-    text-shadow: 4px 4px 10px rgba(255, 140, 0, 0.6);
+    font-family: 'MedievalSharp', cursive;
+    font-size: 6rem;
+    color: #ffbb56; /* Warm ember-orange */
+    text-shadow: 8px 8px 20px rgb(96, 42, 0);
     letter-spacing: 3px;
     margin-bottom: 30px;
 }
 
 /* Button Styling (All Clickables) */
 button {
-    font-size: 1.8rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 1.4rem;
     padding: 14px 28px;
     margin: 14px 0;
     border: 3px solid #d57d1f;
     background: linear-gradient(145deg, #624a2e, #9d6d34);
     color: #f4c879; /* Ember gold */
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-    border-radius: 8px;
+    border-radius: 80px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -280,7 +286,8 @@ button:hover {
 
 /* Centered Synopsis Section */
 #synopsis {
-    font-size: 1.6rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 1.1rem;
     font-style: italic;
     max-width: 700px;
     margin: 50px auto;
