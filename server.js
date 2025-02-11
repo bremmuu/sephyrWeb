@@ -1,49 +1,40 @@
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
+const fs = require('fs');
+
 const app = express();
 const port = 3000;
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // To parse form data
+// Ensure 'public/images/' directory exists for uploads
+const imagesDir = path.join(__dirname, 'public', 'images');
+if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+}
 
-// Set up multer storage for images
+// Multer storage configuration
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'public', 'images')); // Save images to the 'images' folder
-    },
+    destination: imagesDir,
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Use a unique filename
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// Serve static files from the 'public' folder
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files (HTML, CSS, JS, images)
+app.use(express.static('public'));
 
-// Home route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Character creation route (POST request)
+// Character creation endpoint
 app.post('/character', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ status: 'error', message: 'Image is required' });
+    }
+
     const { name, bio } = req.body;
-    const image = req.file ? `/images/${req.file.filename}` : null;
+    const image = `/images/${req.file.filename}`;
 
-    // Store character information (for now, we'll just return it as a response)
-    res.json({
-        status: 'success',
-        name: name,
-        bio: bio,
-        image: image
-    });
-
-    // You could store this in a database for persistence in the future
+    res.json({ status: 'success', name, bio, image });
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+// Start server
+app.listen(port, () => console.log(`✅ Server running at http://localhost:${port}`));
