@@ -232,8 +232,34 @@ body {
     animation: fadeIn 1.8s forwards 2.1s;
 }
 
-#synopsis {
-    animation: fadeIn 2.4s forwards 2.6s;
+.synopsis-container { /* Change from #synopsis to .synopsis-container */
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply delays for sequential fade-in */
+#welcome-text {
+    animation: fadeIn 0.5s forwards 0.7s;
+}
+
+#create-character-btn {
+    animation: fadeIn 1.5s forwards 1.5s;
+}
+
+#view-characters-btn {
+    animation: fadeIn 1.8s forwards 2.1s;
+}
+
+.synopsis-container { 
+    animation: fadeIn 2.8s forwards 2.9s; 
 }
 
 @font-face {
@@ -254,12 +280,14 @@ body {
 
 /* Welcome Text */
 #welcome-text {
-    font-family: 'MedievalSharp', cursive;
+    font-family: 'MedievalSharp', serif;
     font-size: 6rem;
     color: #ffbb56; /* Warm ember-orange */
     text-shadow: 8px 8px 20px rgb(96, 42, 0);
     letter-spacing: 3px;
     margin-bottom: 30px;
+    user-select: none;
+    cursor: default;
 }
 
 /* Button Styling (All Clickables) */
@@ -282,19 +310,117 @@ button:hover {
     background: linear-gradient(145deg, #9d6d34, #624a2e);
     transform: scale(1.1);
     border-color: #f7b048;
+    
 }
 
-/* Centered Synopsis Section */
+.synopsis-container {
+    margin: 50px auto;
+    padding: 10px; /* Starts small */
+    border: 3px solid #d57d1f;
+    border-radius: 120px;
+    background: rgba(60, 40, 20, 0.6);
+    overflow: hidden;
+    min-height: 50px; /* Ensures a minimum height */
+    max-height: 50px; /* Prevents expansion initially */
+    max-width: 50px;
+    text-align: center;
+    transition: max-width 0.9s ease-in-out, max-height 0.9s ease-in-out, padding 0.5s ease-in-out, border-radius 0.5s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.synopsis-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('../images/synopsis.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.synopsis-container::after {
+    content: "Synopsis";
+    font-family: 'Metamorphous', serif;
+    font-size: 1.5rem;
+    color: #f4c879;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    position: absolute;
+    margin-top: 10px;
+    top: -60px; /* Moves it above the container */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+}
+
+.synopsis-container:hover {
+    max-width: 500px;
+    max-height: 380px; /* Expands when hovered */
+    border-radius: 40px;
+    padding: 50px;
+}
+
+/* Hide image when hovered */
+.synopsis-container:hover::before {
+    opacity: 0;
+}
+
+/* Show "Synopsis" at the top */
+.synopsis-container:hover::after {
+    top: 10px; /* Moves into place */
+    opacity: 1;
+}
+
 #synopsis {
     font-family: 'Metamorphous', serif;
     font-size: 1.1rem;
     font-style: italic;
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 20px;
     color: #f4c879;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    border: 3px solid #d57d1f;
-    border-radius: 12px;
-    background: rgba(60, 40, 20, 0.6); /* Ember fade */
+    text-align: center;
+    user-select: none;
+    opacity: 0; /* Hidden initially */
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out, max-height 0.5s ease-in-out;
 }
+
+
+.synopsis-container:hover #synopsis {
+    opacity: 1;
+    max-height: 500px; /* Expands dynamically */
+}
+
+.synopsis-container:not(:hover) #synopsis {
+    opacity: 0;
+    max-height: 0;
+}
+
+.discover-link {
+    font-family: 'Metamorphous', serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #d57d1f; /* Warm ember orange */
+    text-decoration: none;
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.discover-link:hover {
+    color: #f4c879; /* Ember gold */
+    text-shadow: 2px 2px 6px rgba(255, 200, 120, 0.8);
+    transform: scale(1.2); /* Enlarges the text */
+}
+
